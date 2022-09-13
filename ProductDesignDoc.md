@@ -39,6 +39,9 @@ ReactJS
 #### Server Tech
 NodeJS
 
+#### Database
+MongoDB
+
 ## Top Application Capabilities (name at least 5)
 
 ### 1. Suggest movies based on user criteria (movie categories, actors, past likes/dislikes, review system, etc.)
@@ -55,7 +58,7 @@ NodeJS
 ## Scenarios
 
 ### Scenario #1
-Bob enjoys watching movies, but doesn’t like wasting time researching movies he may potentially like or dislike. Bob can use the Movie Tinder app which records past movies he swiped left or right on to suggest new movies based on the categories of the movies that were swiped left, such as categories, actors, user ratings, etc. Now, Bob no longer has to search for movies himself and can have movies suggested to him quickly based on his interests and the streaming services they’re available on.. 
+Bob enjoys watching movies, but doesn’t like wasting time researching movies he may potentially like or dislike. Bob can use the Movie Tinder app which records past movies he swiped left or right on to suggest new movies based on the categories of the movies that were swiped left, such as categories, actors, user ratings, etc. Now, Bob no longer has to search for movies himself and can have movies suggested to him quickly based on his interests and the streaming services they’re available on. 
 
 ### Scenario #2
 Jessica and her friends love to watch movies together every weekend. Lately, however, Jessica hasn’t been able to find any movies that she and her friends are interested in. Movie nights have become a flop due to disinterest as early as 10 minutes into the movie. In an effort to find a good movie for the upcoming weekend, Jessica stumbles upon the Movie Tinder app. She opens the app and 
