@@ -46,7 +46,7 @@ MongoDB
 
 ### 1. Suggest movies based on user criteria (movie categories, actors, past likes/dislikes, review system, etc.)
 
-### 2. Simple swiping system (much like tinder). Swipe right for “like”, left for “dislike”, and down for “haven’t seen”
+### 2. Simple preference picking system. Click buttons “like”,“dislike”, and “haven’t seen”
 
 ### 3. Review System for users for ratings and posting reviews
 
@@ -58,13 +58,13 @@ MongoDB
 ## Scenarios
 
 ### Scenario #1
-Bob enjoys watching movies, but doesn’t like wasting time researching movies he may potentially like or dislike. Bob can use the Movie Tinder app which records past movies he swiped left or right on to suggest new movies based on the categories of the movies that were swiped left, such as categories, actors, user ratings, etc. Now, Bob no longer has to search for movies himself and can have movies suggested to him quickly based on his interests and the streaming services they’re available on. 
+Bob enjoys watching movies, but doesn’t like wasting time researching movies he may potentially like or dislike. Bob can use the Pick-a-Flick website which records past movies he click on buttons to show whether the promoted movies are his preference to suggest new movies based on the categories of the movies that were picked, such as categories, actors, user ratings, etc. Now, Bob no longer has to search for movies himself and can have movies suggested to him quickly based on his interests and the streaming services they’re available on. 
 
 ### Scenario #2
-Jessica and her friends love to watch movies together every weekend. Lately, however, Jessica hasn’t been able to find any movies that she and her friends are interested in. Movie nights have become a flop due to disinterest as early as 10 minutes into the movie. In an effort to find a good movie for the upcoming weekend, Jessica stumbles upon the Movie Tinder app. She opens the app and swipes left on the past movies she disliked, and right on past movies she liked. Based on her choices, she finally finds some movies that she knows she and her friends will love.
+Jessica and her friends love to watch movies together every weekend. Lately, however, Jessica hasn’t been able to find any movies that she and her friends are interested in. Movie nights have become a flop due to disinterest as early as 10 minutes into the movie. In an effort to find a good movie for the upcoming weekend, Jessica stumbles upon the Pick-a-Flick site. She opens the website and click "dislike" on the past movies she disliked, and "like" on past movies she liked. Based on her choices, she finally finds some movies that she knows she and her friends will love.
 
 ### Scenario #3
-Joe believes movie critics are snobby and their opinions don’t match the common movie-watcher. Joe wants a user-orientated movie app where tech-savvy movie-lovers like him can leave reviews for movies and get movie suggestions based on those user reviews. Joe can join the Movie Tinder app to leave reviews for movies he’s watched, see how other users rated the movie, and get suggestions based on ratings from other users. 
+Joe believes movie critics are snobby and their opinions don’t match the common movie-watcher. Joe wants a user-orientated movie app where tech-savvy movie-lovers like him can leave reviews for movies and get movie suggestions based on those user reviews. Joe can join the Pick-a-Flick website to leave reviews for movies he’s watched, see how other users rated the movie, and get suggestions based on ratings from other users. 
 
 ## Team Members
 | **Name** | **Location** | **Time zone offset from Chicago (Chicago is 0 offset)** |
