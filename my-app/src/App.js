@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+import logo from './logo.PNG';
 import './App.css';
 
 function App() {
@@ -6,7 +6,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <h1>Welcome to Pick-a-Flick</h1>
-        <img src={logo.png} className="App-logo" alt="logo" />
+        <img src={logo} alt="" ></img>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
