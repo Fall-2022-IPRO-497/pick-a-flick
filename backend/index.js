@@ -7,6 +7,15 @@ const cors = require('cors')
 app.use(cors())
 require('dotenv').config()
 
+const Movie = require('./models/movies')
+
+app.get('/api/movies', (req, res) => {
+    Movie.find({})
+      .then(movies => {
+        res.json(movies)
+      })
+      .catch(error => console.log(error))
+})
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {

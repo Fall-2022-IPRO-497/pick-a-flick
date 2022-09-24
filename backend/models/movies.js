@@ -13,7 +13,7 @@ mongoose.connect(url)
   const movieSchema = new mongoose.Schema({
     'movieName': {
       type: String
-    },
+    }
   })
 
   movieSchema.set('toJSON', {
