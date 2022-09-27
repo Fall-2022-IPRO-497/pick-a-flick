@@ -1,23 +1,15 @@
 import logo from './logo.svg';
 import './App.css';
+import Like_button from './component/Like_button'
+import Dislike_button from './component/Dislike_button'
+import Pass_button from './component/Pass_button'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Like_button/>
+      <Pass_button/>
+      <Dislike_button/>
     </div>
   );
 }
