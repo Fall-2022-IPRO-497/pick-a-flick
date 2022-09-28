@@ -4,3 +4,8 @@
     padding-bottom: 15px;
     margin-top: 50px;
 }
+
+.thumb-button{
+    max-width: 50px;
+    max-height: 50px;
+}
