@@ -8,7 +8,6 @@ import './rating_page.css'
  function Rating(){
     return (
     <div>
-        <h1>Welcome to the Rating page!</h1>
         <MovieCard></MovieCard>
         <div classname = 'button-container'>
           <Button variant="success">  Like </Button>{' '}
