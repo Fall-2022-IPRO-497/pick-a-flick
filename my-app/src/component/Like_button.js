@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-export default function Like_button(props){
+export default function LikeButton(props){
 
     return(
-        <div className="LikeButtn">
+        <div className="LikeButton">
             <div>
             <button type="button" onclick="alert('liked button')">Like</button>
             </div>    

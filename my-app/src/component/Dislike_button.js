@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-export default function Dislike_button(props){
+export default function DislikeButton(props){
 
     return(
-        <div className="DislikeButtn">
+        <div className="DislikeButton">
             <div>
             <button type="button">Dislike</button>
             </div>    

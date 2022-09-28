@@ -1,32 +1,46 @@
-import logo from './logo.PNG';
+//import logo from './logo.PNG';
+import LikeButton from './component/Like_button'
+import DislikeButton from './component/Dislike_button'
+import PassButton from './component/Pass_button'
+import React, { Component } from 'react';
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import Home from './component/home_page';
+import Rating from './component/rating_page';
+import Recommendations from './component/recommendations_page';
 import './App.css';
-import Like_button from './component/Like_button'
-import Dislike_button from './component/Dislike_button'
-import Pass_button from './component/Pass_button'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Pick-a-Flick</h1>
-        <img src={logo} alt="" ></img>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Like_button/>
-      <Pass_button/>
-      <Dislike_button/>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router>
+           <div >
+            <ul className="App-header">
+              <li>
+                <Link to="/home">Home</Link>
+              </li>
+              <li>
+                <Link to="/rating">Rate Movies!</Link>
+              </li>
+              <li>
+                <Link to="/recommendation">See Your Recommendations</Link>
+              </li>
+            </ul>
+           <Routes>
+                 <Route exact path='/home' element={< Home />}></Route>
+                 <Route exact path='/rating' element={< Rating />}></Route>
+                 <Route exact path='/recommendation' element={< Recommendations />}></Route>
+          </Routes>
+          </div>  
+        </Router>
+        <div classname = 'button-container'>
+          <LikeButton className="button"/>
+          <PassButton className="button"/>
+          <DislikeButton className="button"/>
+        </div>
+      </div>
+   );
+  }
 }
 
 export default App;
