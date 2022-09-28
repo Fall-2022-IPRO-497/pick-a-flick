@@ -1,13 +1,11 @@
 //import logo from './logo.PNG';
-import LikeButton from './component/Like_button'
-import DislikeButton from './component/Dislike_button'
-import PassButton from './component/Pass_button'
 import React, { Component } from 'react';
-import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router,Routes, Route} from 'react-router-dom';
 import Home from './component/home_page';
 import Rating from './component/rating_page';
 import Recommendations from './component/recommendations_page';
 import './App.css';
+import Nav from 'react-bootstrap/Nav'
 
 class App extends Component {
   render() {
@@ -15,17 +13,17 @@ class App extends Component {
       <div className="App">
         <Router>
            <div >
-            <ul className="App-header">
-              <li>
-                <Link to="/home">Home</Link>
-              </li>
-              <li>
-                <Link to="/rating">Rate Movies!</Link>
-              </li>
-              <li>
-                <Link to="/recommendation">See Your Recommendations</Link>
-              </li>
-            </ul>
+            <Nav className="justify-content-center" activeKey="/home">
+              <Nav.Item>
+                <Nav.Link href="/home">Home</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/rating">Rating</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/recommendation">Recommendations</Nav.Link>
+              </Nav.Item>
+            </Nav>
            <Routes>
                  <Route exact path='/home' element={< Home />}></Route>
                  <Route exact path='/rating' element={< Rating />}></Route>
@@ -33,11 +31,6 @@ class App extends Component {
           </Routes>
           </div>  
         </Router>
-        <div classname = 'button-container'>
-          <LikeButton className="button"/>
-          <PassButton className="button"/>
-          <DislikeButton className="button"/>
-        </div>
       </div>
    );
   }
