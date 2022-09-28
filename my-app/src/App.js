@@ -1,5 +1,8 @@
 import logo from './logo.PNG';
 import './App.css';
+import Like_button from './component/Like_button'
+import Dislike_button from './component/Dislike_button'
+import Pass_button from './component/Pass_button'
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
           Learn React
         </a>
       </header>
+      <Like_button/>
+      <Pass_button/>
+      <Dislike_button/>
     </div>
   );
 }
