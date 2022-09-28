@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
+import MovieCard from './movie_card';
+import './rating_page.css'
 
 
 
@@ -7,7 +9,7 @@ import Button from 'react-bootstrap/Button';
     return (
     <div>
         <h1>Welcome to the Rating page!</h1>
-        
+        <MovieCard></MovieCard>
         <div classname = 'button-container'>
           <Button variant="success">  Like </Button>{' '}
           <Button variant="secondary">Haven't Seen</Button>{' '}

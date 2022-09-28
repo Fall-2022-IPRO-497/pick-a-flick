@@ -36,14 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.button{
-  display: inline-block;
-  vertical-align: text-top;
-  margin: 0 auto;
-}
-
-.button-container{
-  width: 100%;
-
-}
