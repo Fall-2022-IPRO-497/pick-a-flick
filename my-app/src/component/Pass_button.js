@@ -1,10 +1,10 @@
 import React from 'react'
 
 
-export default function Pass_button(props){
+export default function PassButton(props){
 
     return(
-        <div className="PassButtn">
+        <div className="PassButton">
             <div>
             <button type="button">Pass</button>
             </div>    

@@ -1,33 +1,38 @@
-import logo from './logo.PNG';
+import React, { Component } from 'react';
+import { BrowserRouter as Router,Routes, Route} from 'react-router-dom';
+import Home from './component/home_page';
+import Rating from './component/rating_page';
+import Recommendations from './component/recommendations_page';
 import './App.css';
-import Like_button from './component/Like_button'
-import Dislike_button from './component/Dislike_button'
-import Pass_button from './component/Pass_button'
+import Nav from 'react-bootstrap/Nav'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Welcome to Pick-a-Flick</h1>
-        <img src={logo} alt="" ></img>
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-
-      <Like_button/>
-      <Pass_button/>
-      <Dislike_button/>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Router>
+           <div >
+            <Nav className="justify-content-center" activeKey="/home">
+              <Nav.Item>
+                <Nav.Link href="/home">Home</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/rating">Rating</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link href="/recommendation">Recommendations</Nav.Link>
+              </Nav.Item>
+            </Nav>
+           <Routes>
+                 <Route exact path='/home' element={< Home />}></Route>
+                 <Route exact path='/rating' element={< Rating />}></Route>
+                 <Route exact path='/recommendation' element={< Recommendations />}></Route>
+          </Routes>
+          </div>  
+        </Router>
+      </div>
+   );
+  }
 }
 
 export default App;
