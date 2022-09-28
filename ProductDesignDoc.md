@@ -113,6 +113,6 @@ Joe believes movie critics are snobby and their opinions don’t match the commo
 | 10 - Think, build, test, and demo for final	      |  Ayman  |
 | 11 - Think, build, test, and demo for final         | Haoran  |
 | 12 - Think, build, test, and demo for final         | Haoran  |
-| 13 - Think, build, test, and demo for final         | Yongkang  |
-| 14 - Presentation dry run                           | Everyone   |
-| 15 - Presentation                                   | Everyone	|
+| 13 - Think, build, test, and demo for final         | Yongkang |
+| 14 - Presentation dry run                           | Everyone |
+| 15 - Presentation                                   | Everyone |
