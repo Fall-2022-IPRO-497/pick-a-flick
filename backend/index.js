@@ -10,6 +10,7 @@ require('dotenv').config()
 const Movie = require('./models/movies')
 
 app.get('/api/movies', (req, res) => {
+    
     Movie.find({})
       .then(movies => {
         res.json(movies)
@@ -18,9 +19,13 @@ app.get('/api/movies', (req, res) => {
 })
 
 app.post('/api/movies/', (req, res) => {
-    const movie = new Movie({
-        movieName: "Test"
-    })
+    const object = {
+        userName: "Test User",
+        like: [],
+        dislike: [],
+        unwatched: [],
+    }
+    const movie = new Movie(object)
     movie.save()
         .then(savedMovie => {
             res.json(savedMovie)
@@ -38,7 +43,16 @@ app.delete('/api/movies/:id', (req, res) => {
 })
 
 app.put('/api/movies/:id', (req, res) => {
-    console.log("Update: need to know schema before adding actual logic")
+    const body = req.body
+    Movie.findByIdAndUpdate({_id: req.params.id }),
+    {
+        "$set": {
+            userName: body.userName,
+            like: body.likes,
+            dislike: body.dislikes,
+            unwatched: body.watched
+        }
+    }
 })
 
 const PORT = process.env.PORT || 3001
