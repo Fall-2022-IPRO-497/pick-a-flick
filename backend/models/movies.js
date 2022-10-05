@@ -10,10 +10,15 @@ mongoose.connect(url)
     console.log(error.message)
   })
 
+  const movieDetails = new mongoose.Schema({
+    name: String
+  })
+
   const movieSchema = new mongoose.Schema({
-    'movieName': {
-      type: String
-    }
+    'userName': String,
+    'like': [movieDetails],
+    'dislike': [movieDetails],
+    'unwatched': [movieDetails],
   })
 
   movieSchema.set('toJSON', {
