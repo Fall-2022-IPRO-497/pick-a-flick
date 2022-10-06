@@ -20,8 +20,8 @@ app.get('/api/movies', (req, res) => {
 
 app.post('/api/movies/', (req, res) => {
     const object = {
-        userName: "Test User",
-        like: [],
+        userName: req.body.userName,
+        like: req.body.like,
         dislike: [],
         unwatched: [],
     }
