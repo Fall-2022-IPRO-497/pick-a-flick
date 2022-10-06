@@ -7,8 +7,7 @@ import './App.css';
 import Nav from 'react-bootstrap/Nav'
 import movies from './modules/movies.js'
 
-export default function App() {
-
+export default function App() { 
   movies.getAll()
     .then(movies => console.log(movies))
   return (
@@ -34,5 +33,5 @@ export default function App() {
         </div>  
       </Router>
     </div>
-  );
+  )
 }
