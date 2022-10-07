@@ -46,7 +46,7 @@ app.put('/api/movies/:id', (req, res) => {
     console.log("get in put")
     const body = req.body
     console.log("req body is " + body)
-    Movie.findByIdAndUpdate({_id: req.params.id }),
+    Movie.findByIdAndUpdate({_id: req.params.id },
     {
         "$set": {
             userName: body.userName,
@@ -54,7 +54,9 @@ app.put('/api/movies/:id', (req, res) => {
             dislike: body.dislike,
             unwatched: body.unwatched
         }
-    }
+    }, {new : true})
+    .then(updatedMovie => res.json(updatedMovie))
+    .catch(error => console.log(error))
 })
 
 const PORT = process.env.PORT || 3001
