@@ -10,11 +10,10 @@ import movies from '../modules/movies.js'
 const click_like = (event) => {
   event.preventDefault()
   console.log("Get in click_like event")
-  var expect_user = "dummyUser"
+  var expect_user = "dummyUser4"
   var expect_movie_name = "dummyMovie"
 
   var changed_obj = []
-  var rest_obj = []
 
   function checkifusername(obj, expect_user){
     if (obj.userName) {
@@ -27,16 +26,12 @@ const click_like = (event) => {
 
   movies.getAll()
       .then(movies => {
-         
-          changed_obj = movies.filter(checkifusername)
-          rest_obj = movies.filter(e => (!checkifusername(e)))
-          console.log("content of resT_obj is " + rest_obj)
-          update_data(rest_obj, changed_obj)
+          changed_obj = movies.filter(e => (checkifusername(e, expect_user)))
+          update_data(changed_obj)
       })
 
   
-  function update_data(rest_obj, changed_obj){
-    console.log("content of rest_obj is" + rest_obj)
+  function update_data(changed_obj){
     if (changed_obj && changed_obj.length > 1) {
         console.log("Error:More than one user with the same name detected!")
     } 
@@ -44,23 +39,36 @@ const click_like = (event) => {
         console.log("New user detected. Adding new information to the database!")
         const newUser = {
             userName: expect_user,
-            like:[expect_movie_name],
+            like:[{name:expect_movie_name}],
             dislike:[],
             unwatched:[],
         }
-        rest_obj.push(newUser)
-        console.log("new array is " + rest_obj)
-        console.log("new array length is " + rest_obj.length)
-        movies.create(rest_obj)
+        movies.create(newUser)
           .then(movies => {
             console.log('Added a new liked movie to the a new user history!')
             console.log(movies)
         })
     }else{
       console.log("length is "+ changed_obj.length)
-      changed_obj[0].like.push(expect_movie_name)
-      movies.update(rest_obj.concat(changed_obj))
-        .then(console.log('Added a new liked movie to the existing user history!'))
+      var oldObj = changed_obj[0]
+      var oldLike = oldObj.like
+      
+      oldLike.push({name:expect_movie_name, _id:(oldLike.length+1).toString()})
+      var newLike = oldLike
+      console.log("newLike is " + newLike)
+     
+      
+      const newObj = {
+        ...oldObj,
+        like: newLike
+      }
+      console.log(newObj)
+
+      movies.update(newObj)
+        .then(newObj => {
+          console.log('Added a new liked movie to the existing user history!')
+          console.log(newObj)
+        })
     }   
 
   }
