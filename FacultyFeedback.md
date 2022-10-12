@@ -27,6 +27,11 @@
 - Please add an item to your boards to do this github.com/mschray/IPro497Sample/blob/main/Course%20Content/SprintReviewProjectViews.md![image]
 
 ## Week 8 ##
+- Pick-a-flick is another great name
+- Nice work picking a demographic (age range) for who you are targeting
+- Nice way to have thought through your stakeholders - it's a very complete view of the industry
+- I liked the now we will hand it over to Yougkang - very smooth handoff
+- Great to see a basic working demo
 
 ## Week 9 ##
 
