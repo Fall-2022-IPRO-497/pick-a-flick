@@ -3,7 +3,7 @@ import movies from '../modules/movies'
 export function click_like(event){
     event.preventDefault()
     var expect_user = "dummyUser4"
-    var expect_movie_name = "dummyMovie"
+    var expect_movie_name = "dummyMovie6"
   
     var changed_obj = []
   
@@ -24,7 +24,7 @@ export function click_like(event){
   
     function find_same_movie(arr, obj_tofind) {
         for (var obj of arr) {
-            if (obj.userName === obj_tofind.userName) {
+            if (obj.name === obj_tofind.name) {
                 return true
             }
         }
