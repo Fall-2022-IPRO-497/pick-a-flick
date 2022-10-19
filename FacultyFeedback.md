@@ -34,6 +34,12 @@
 - Great to see a basic working demo
 
 ## Week 9 ##
+- If needed, make sure update, remove or edit stories as needed to keep them up to date - this is called Backlog refinement
+- Thanks for setting the names as the tabs
+- Nice use of labels
+- Think of using labels to identify the stories that need to be completed to get through scenario one
+- Think demo of your product when I arrive for sprint review - who is going to demo 
+- Know who your sprint review lead is before the instructor arrives
 
 ## Week 10 ##
 
