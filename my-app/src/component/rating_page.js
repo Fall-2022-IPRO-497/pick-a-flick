@@ -6,11 +6,12 @@ import thumbsUp from './thumbs-up.png';
 import thumbsDown from './thumbs-down.png';
 import Image from 'react-bootstrap/Image'
 
- function Rating(){
+ function Rating({userDetails}){
     return (
     <div>
+        {console.log(userDetails)}
         <MovieCard></MovieCard>
-        <div classname = 'button-container'>
+        <div className = 'button-container'>
           <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} fluid={true}></Image></Button>{' '}
           <Button variant="secondary">Havent Seen It</Button>{' '}
           <Button variant="danger" ><Image  className='thumb-button' src = {thumbsDown} fluid={true}></Image></Button>{' '}

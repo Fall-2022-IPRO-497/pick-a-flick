@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router,Routes, Route} from 'react-router-dom';
 import Home from './component/home_page';
 import Rating from './component/rating_page';
@@ -6,12 +7,39 @@ import Recommendations from './component/recommendations_page';
 import './App.css';
 import Nav from 'react-bootstrap/Nav'
 import movies from './modules/movies.js'
+import jwt_decode from 'jwt-decode'
 
-export default function App() { 
+export default function App() {
+  const [userDetails, setUserDetails] = useState(null)
+    
+  useEffect(() => {
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: "947709340210-hceb2ua2gtelguedq4620h8fvdgckvai.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )
+  }, [userDetails])
+
+  function handleCallbackResponse(response) {
+    const user = jwt_decode(response.credential)
+    setUserDetails({
+      name: user.name,
+      email: user.email
+    })
+  }
+
   movies.getAll()
     .then(movies => console.log(movies))
+  
   return (
     <div className="App">
+      
+      <div id="signInDiv"></div>
       <Router>
         <div>
           <Nav className="justify-content-center" activeKey="/home">
@@ -27,7 +55,7 @@ export default function App() {
             </Nav>
             <Routes>
               <Route exact path='/home' element={< Home />}></Route>
-              <Route exact path='/rating' element={< Rating />}></Route>
+              <Route exact path='/rating' element={< Rating userDetails={userDetails} />}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  
