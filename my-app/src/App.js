@@ -13,17 +13,23 @@ export default function App() {
   const [userDetails, setUserDetails] = useState(null)
     
   useEffect(() => {
-    /* global google */
-    google.accounts.id.initialize({
-      client_id: "947709340210-hceb2ua2gtelguedq4620h8fvdgckvai.apps.googleusercontent.com",
-      callback: handleCallbackResponse
-    })
+    const userDetailsObject = window.localStorage.getItem('userDetailsKey')
+    if (userDetailsObject) {
+      setUserDetails(JSON.parse(userDetailsObject))
+    }
+    else {
+      /* global google */
+      google.accounts.id.initialize({
+        client_id: "947709340210-hceb2ua2gtelguedq4620h8fvdgckvai.apps.googleusercontent.com",
+        callback: handleCallbackResponse
+      })
 
-    google.accounts.id.renderButton(
-      document.getElementById("signInDiv"),
-      { theme: "outline", size: "large" }
-    )
-  }, [userDetails])
+      google.accounts.id.renderButton(
+        document.getElementById("signInDiv"),
+        { theme: "outline", size: "large" }
+      )
+    }
+  }, [])
 
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
@@ -31,6 +37,7 @@ export default function App() {
       name: user.name,
       email: user.email
     })
+    window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email}));
   }
 
   movies.getAll()
