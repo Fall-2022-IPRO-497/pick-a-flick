@@ -1,0 +1,4 @@
+UserName: dummyUser1
+Dislike: [dummyMovie3 ]
+Like: []
+Unwatched: []
