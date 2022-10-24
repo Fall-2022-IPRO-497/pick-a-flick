@@ -19,11 +19,12 @@ app.get('/api/movies', (req, res) => {
 })
 
 app.post('/api/movies/', (req, res) => {
+    console.log("get in post")
     const object = {
-        userName: "Test User",
-        like: [],
-        dislike: [],
-        unwatched: [],
+        userName: req.body.userName,
+        like: req.body.like,
+        dislike: req.body.dislike,
+        unwatched: req.body.unwatched,
     }
     const movie = new Movie(object)
     movie.save()
@@ -34,7 +35,6 @@ app.post('/api/movies/', (req, res) => {
 })
 
 app.delete('/api/movies/:id', (req, res) => {
-    console.log(req.params.id)
     Movie.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(204).end()
@@ -43,16 +43,20 @@ app.delete('/api/movies/:id', (req, res) => {
 })
 
 app.put('/api/movies/:id', (req, res) => {
+    console.log("get in put")
     const body = req.body
-    Movie.findByIdAndUpdate({_id: req.params.id }),
+    console.log("req body is " + body)
+    Movie.findByIdAndUpdate({_id: req.params.id },
     {
         "$set": {
             userName: body.userName,
-            like: body.likes,
-            dislike: body.dislikes,
-            unwatched: body.watched
+            like: body.like,
+            dislike: body.dislike,
+            unwatched: body.unwatched
         }
-    }
+    }, {new : true})
+    .then(updatedMovie => res.json(updatedMovie))
+    .catch(error => console.log(error))
 })
 
 const PORT = process.env.PORT || 3001
