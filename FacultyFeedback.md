@@ -21,10 +21,25 @@
 - Sprint lead please lead the team in their first retro - https://retrotool.app/
 
 ## Week 7 ##
+- 10/11 is mid-term presentation.  Focus is on the demo with a simple deck walkthrough
+- Work through who is presenting what and in what order
+- Know what are you demoing and in what order (on what machine)
+- Please add an item to your boards to do this github.com/mschray/IPro497Sample/blob/main/Course%20Content/SprintReviewProjectViews.md![image]
 
 ## Week 8 ##
+- Pick-a-flick is another great name
+- Nice work picking a demographic (age range) for who you are targeting
+- Nice way to have thought through your stakeholders - it's a very complete view of the industry
+- I liked the now we will hand it over to Yougkang - very smooth handoff
+- Great to see a basic working demo
 
 ## Week 9 ##
+- If needed, make sure update, remove or edit stories as needed to keep them up to date - this is called Backlog refinement
+- Thanks for setting the names as the tabs
+- Nice use of labels
+- Think of using labels to identify the stories that need to be completed to get through scenario one
+- Think demo of your product when I arrive for sprint review - who is going to demo 
+- Know who your sprint review lead is before the instructor arrives
 
 ## Week 10 ##
 

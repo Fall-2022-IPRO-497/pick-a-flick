@@ -1,9 +1,9 @@
 import movies from '../modules/movies'
 
-export function click_like(event){
+export function click_neverseen(event){
     event.preventDefault()
     var expect_user = "dummyUser4"
-    var expect_movie_name = "dummyMovie6"
+    var expect_movie_name = "dummyMovie4"
   
     var changed_obj = []
   
@@ -23,14 +23,14 @@ export function click_like(event){
         })
   
     function find_same_movie(arr, obj_tofind) {
-        for (var obj of arr) {
-            if (obj.name === obj_tofind.name) {
-                return true
-            }
-        }
-        return false
+      for (var obj of arr) {
+          if (obj.name === obj_tofind.name) {
+              return true
+          }
+      }
+      return false
     }
-
+    
     function update_data(changed_obj){
       if (changed_obj && changed_obj.length > 1) {
           console.log("Error:More than one user with the same name detected!")
@@ -38,36 +38,37 @@ export function click_like(event){
   
       else if (changed_obj.length === 0) {
           console.log("New user detected")
+          
           const newUser = {
               userName: expect_user,
-              like:[{name:expect_movie_name}],
+              like:[],
               dislike:[],
-              unwatched:[],
+              unwatched:[{name: expect_movie_name}],
           }
           movies.create(newUser)
             .then(movies => {
-              console.log('Successfully added a new liked movie to the a new user history!')
+              console.log('Successfully added a new unwatched movie to the a new user history!')
               console.log(movies)
           })
       }else{
-        console.log("Updating like Array for existing user")
+        console.log("Updating unWatched Array for existing user")
         var oldObj = changed_obj[0]
-        var oldLike = oldObj.like
-        const add_like_obj = {name: expect_movie_name}
-        if (find_same_movie(oldLike, add_like_obj)) {
-            console.log("Cannot add same liked movie!")
+        var oldUnwatch = oldObj.unwatched
+        const add_unwatch_obj = {name: expect_movie_name}
+        if (find_same_movie(oldUnwatch, add_unwatch_obj)) {
+            console.log("Cannot add same unwatched movie!")
             return
         }
-        oldLike.push(add_like_obj)
-        var newLike = oldLike
+        oldUnwatch.push({name:expect_movie_name})
+        var newUnwatch = oldUnwatch
        
         const newObj = {
           ...oldObj,
-          like: newLike
+          unwatch: newUnwatch
         }
         movies.update(newObj)
           .then(newObj => {
-            console.log('Successfully added a new liked movie to the existing user history!')
+            console.log('Successfully added a new unWatched movie to the existing user history!')
             console.log(newObj)
           })
       }   

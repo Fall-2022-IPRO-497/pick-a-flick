@@ -17,13 +17,45 @@ app.get('/api/movies', (req, res) => {
       })
       .catch(error => console.log(error))
 })
+function output_data(body) {
+    console.log("Outputing data to a text file")
+    const fs = require('fs')
+    var data = 'UserName: '
+    data += body.userName
+    data += '\n'
+    data += 'Dislike: ['
+    for (var movie of body.dislike) {
+        data += movie.name
+        data += ' '
+    }
+    data += ']\n'
+    data += 'Like: ['
+    for (var movie of body.like) {
+        data += movie.name
+        data += ' '
+    }
+    data += ']\n'
+    data += 'Unwatched: ['
+    for (var movie of body.unwatched) {
+        data += movie.name
+        data += ' '
+    }
+    data += ']'
 
+    fs.writeFile('./algorithm/data.txt', data, (err) =>  {
+        if (err) throw err;
+      })
+
+}
 app.post('/api/movies/', (req, res) => {
+    console.log("get in post")
+    const body = req.body
+    output_data(body)
     const object = {
-        userName: "Test User",
-        like: [],
-        dislike: [],
-        unwatched: [],
+        userName: body.userName,
+        like: body.like,
+        dislike: body.dislike,
+        unwatched: body.unwatched,
     }
     const movie = new Movie(object)
     movie.save()
@@ -34,7 +66,6 @@ app.post('/api/movies/', (req, res) => {
 })
 
 app.delete('/api/movies/:id', (req, res) => {
-    console.log(req.params.id)
     Movie.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(204).end()
@@ -43,16 +74,22 @@ app.delete('/api/movies/:id', (req, res) => {
 })
 
 app.put('/api/movies/:id', (req, res) => {
+    console.log("get in put")
     const body = req.body
-    Movie.findByIdAndUpdate({_id: req.params.id }),
+    output_data(body)
+    Movie.findByIdAndUpdate({_id: req.params.id },
     {
         "$set": {
             userName: body.userName,
-            like: body.likes,
-            dislike: body.dislikes,
-            unwatched: body.watched
+            like: body.like,
+            dislike: body.dislike,
+            unwatched: body.unwatched
         }
-    }
+    }, {new : true})
+    .then(updatedMovie => {
+        res.json(updatedMovie)
+    })
+    .catch(error => console.log(error))
 })
 
 const PORT = process.env.PORT || 3001
