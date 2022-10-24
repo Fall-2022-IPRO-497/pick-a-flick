@@ -9,9 +9,10 @@ import {click_like} from './Like_button.js'
 import {click_dislike} from './Dislike_button.js'
 import {click_neverseen} from './Neverseen_button.js'
 
- function Rating(){
+ function Rating({userDetails}){
     return (
     <div>
+        {console.log(userDetails)}
         <MovieCard></MovieCard>
         <div classname = 'button-container'>
           <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {click_like} fluid={true}></Image></Button>{' '}
