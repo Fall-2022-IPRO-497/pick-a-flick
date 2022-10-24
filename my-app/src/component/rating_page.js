@@ -12,12 +12,11 @@ import {click_neverseen} from './Neverseen_button.js'
  function Rating({userDetails}){
     return (
     <div>
-        {console.log(userDetails)}
         <MovieCard></MovieCard>
         <div classname = 'button-container'>
-          <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {click_like} fluid={true}></Image></Button>{' '}
-          <Button variant="secondary" onClick = {click_neverseen}>Havent Seen It</Button>{' '}
-          <Button variant="danger" ><Image  className='thumb-button' src = {thumbsDown} onClick = {click_dislike}fluid={true}></Image></Button>{' '}
+          <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {event => click_like(event, userDetails)} fluid={true}></Image></Button>{' '}
+          <Button variant="secondary" onClick = {event => click_neverseen(event, userDetails)}>Havent Seen It</Button>{' '}
+          <Button variant="danger" ><Image  className='thumb-button' src = {thumbsDown} onClick = {event => click_dislike(event, userDetails)}fluid={true}></Image></Button>{' '}
         </div>
     </div>
     );

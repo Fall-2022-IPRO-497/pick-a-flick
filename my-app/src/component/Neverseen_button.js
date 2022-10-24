@@ -1,8 +1,8 @@
 import movies from '../modules/movies'
 
-export function click_neverseen(event){
+export function click_neverseen(event, userDetails){
     event.preventDefault()
-    var expect_user = "dummyUser4"
+    var expect_user = userDetails.name
     var expect_movie_name = "dummyMovie4"
   
     var changed_obj = []

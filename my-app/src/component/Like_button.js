@@ -1,8 +1,8 @@
 import movies from '../modules/movies'
 
-export function click_like(event){
+export function click_like(event, userDetails){
     event.preventDefault()
-    var expect_user = "dummyUser4"
+    var expect_user = userDetails.name
     var expect_movie_name = "dummyMovie6"
   
     var changed_obj = []

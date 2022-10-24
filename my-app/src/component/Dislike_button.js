@@ -1,8 +1,8 @@
 import movies from '../modules/movies'
 
-export function click_dislike(event){
+export function click_dislike(event, userDetails){
     event.preventDefault()
-    var expect_user = "dummyUser1"
+    var expect_user = userDetails.name
     var expect_movie_name = "dummyMovie3"
   
     var changed_obj = []
