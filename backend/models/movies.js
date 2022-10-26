@@ -16,6 +16,7 @@ mongoose.connect(url)
 
   const movieSchema = new mongoose.Schema({
     'userName': String,
+    'userEmail': String,
     'like': [movieDetails],
     'dislike': [movieDetails],
     'unwatched': [movieDetails],

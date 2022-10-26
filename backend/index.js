@@ -23,6 +23,9 @@ function output_data(body) {
     var data = 'UserName: '
     data += body.userName
     data += '\n'
+    data += 'UserEmail: '
+    data += body.userEmail
+    data += '\n'
     data += 'Dislike: ['
     for (var movie of body.dislike) {
         data += movie.name
@@ -53,6 +56,7 @@ app.post('/api/movies/', (req, res) => {
     output_data(body)
     const object = {
         userName: body.userName,
+        userEmail: body.userEmail,
         like: body.like,
         dislike: body.dislike,
         unwatched: body.unwatched,
@@ -81,6 +85,7 @@ app.put('/api/movies/:id', (req, res) => {
     {
         "$set": {
             userName: body.userName,
+            userEmail: body.userEmail,
             like: body.like,
             dislike: body.dislike,
             unwatched: body.unwatched

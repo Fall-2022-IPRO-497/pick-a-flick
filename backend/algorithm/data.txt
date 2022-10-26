@@ -1,4 +1,5 @@
-UserName: dummyUser1
-Dislike: [dummyMovie3 ]
+UserName: Yongkang Hu
+UserEmail: hu.yongkangsg114@gmail.com
+Dislike: []
 Like: []
-Unwatched: []
+Unwatched: [dummyMovie4 ]
