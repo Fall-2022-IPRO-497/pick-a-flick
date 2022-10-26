@@ -42,6 +42,9 @@
 - Know who your sprint review lead is before the instructor arrives
 
 ## Week 10 ##
+- Board looks good - keep working on acceptance criterion, but Jackie has nice examples of good acceptance criterion
+- Nice sprint lead work today
+- Please be ready to demo - when you have working code demoing should not be a big deal
 
 ## Week 11 ##
 
