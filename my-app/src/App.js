@@ -14,22 +14,22 @@ export default function App() {
     
   useEffect(() => {
     const userDetailsObject = window.localStorage.getItem('userDetailsKey')
-    if (userDetailsObject) {
+    if (userDetailsObject && !userDetails) {
       setUserDetails(JSON.parse(userDetailsObject))
-    }
-    else {
+    } else {
       /* global google */
       google.accounts.id.initialize({
-        client_id: "947709340210-hceb2ua2gtelguedq4620h8fvdgckvai.apps.googleusercontent.com",
-        callback: handleCallbackResponse
-      })
+      client_id: "947709340210-hceb2ua2gtelguedq4620h8fvdgckvai.apps.googleusercontent.com",
+      callback: handleCallbackResponse
+    })
+  
 
-      google.accounts.id.renderButton(
-        document.getElementById("signInDiv"),
-        { theme: "outline", size: "large" }
-      )
-    }
-  }, [])
+    google.accounts.id.renderButton(
+      document.getElementById("signInDiv"),
+      { theme: "outline", size: "large" }
+    )}
+  }, [userDetails])
+
 
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
@@ -40,13 +40,14 @@ export default function App() {
     window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email}));
   }
 
-  movies.getAll()
-    .then(movies => console.log(movies))
+  function logOut() {
+    window.localStorage.removeItem('userDetailsKey')
+    setUserDetails(null)
+  }
   
   return (
     <div className="App">
-      
-      <div id="signInDiv"></div>
+      {userDetails ? <button onClick={logOut}>Log Out</button> : <div id="signInDiv"></div>}
       <Router>
         <div>
           <Nav className="justify-content-center" activeKey="/home">
