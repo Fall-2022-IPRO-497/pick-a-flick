@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 import {ListGroup, ListGroupItem} from "react-bootstrap"
 import themoviedb from  './moviedb.js'
-import MovieModal from './movie_modal.js'
 
 // updating the api_key in the moviedb
 themoviedb.common.api_key = "26a91d7ed31857a2aaea9cc746a31703"
@@ -80,8 +79,6 @@ export default class PopularMoviesList extends Component {
 						<ListGroup>
 							{movies}
 						</ListGroup>
-						<MovieModal onHide={this.onHide} show={this.state.show} movie={this.state.movie}>
-						</MovieModal>
 					</div>
 				)
 
