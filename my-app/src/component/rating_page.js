@@ -14,7 +14,7 @@ import {click_neverseen} from './Neverseen_button.js'
     return (
     <div>
         <MovieCard></MovieCard>
-        <div classname = 'button-container'>
+        <div>
           <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {event => click_like(event, userDetails)} fluid={true}></Image></Button>{' '}
           <Button variant="secondary" onClick = {event => click_neverseen(event, userDetails)}>Havent Seen It</Button>{' '}
           <Button variant="danger" ><Image  className='thumb-button' src = {thumbsDown} onClick = {event => click_dislike(event, userDetails)}fluid={true}></Image></Button>{' '}

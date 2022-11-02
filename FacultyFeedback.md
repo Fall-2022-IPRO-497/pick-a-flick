@@ -47,6 +47,10 @@
 - Please be ready to demo - when you have working code demoing should not be a big deal
 
 ## Week 11 ##
+- Bootstrap is great for consistent look and feel - https://getbootstrap.com/
+- Improved acceptance criterion
+- Nice demo
+- Think about the stories that you need to complete for the final demo
 
 ## Week 12 ##
 
