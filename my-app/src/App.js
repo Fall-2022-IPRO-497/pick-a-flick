@@ -11,6 +11,7 @@ import jwt_decode from 'jwt-decode'
 
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
+  const [userMovieDetails, setUserMovieDetails] = useState(null)
     
   useEffect(() => {
     const userDetailsObject = window.localStorage.getItem('userDetailsKey')
@@ -44,6 +45,48 @@ export default function App() {
     window.localStorage.removeItem('userDetailsKey')
     setUserDetails(null)
   }
+
+  function updateMovieRating(event, userDetails, category) {
+    event.preventDefault()
+    let movieName = "dummyMovieName"
+    var updateData = []
+
+    movies.getAll()
+      .then(dataEntries => {
+        updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.email)
+        if (updateData.length === 0) {
+          let newUser = {
+            userName: userDetails.name,
+            userEmail: userDetails.email,
+            like: category === "like" ? [{name: movieName}] : [],
+            dislike: category === "dislike" ? [{name: movieName}] : [],
+            unwatched: category === "unwatched" ? [{name: movieName}] : [],
+          }
+          movies.create(newUser)
+            .then(returnedUser => {
+              setUserMovieDetails({
+                like: returnedUser.like,
+                dislike: returnedUser.dislike,
+                unwatched: returnedUser.unwatched
+              })
+            })
+        } else {
+          
+          let oldCategory = category === "like" ? updateData[0].like : (category === "dislike" ? updateData[0].dislike : updateData[0].unwatched)
+          if (!oldCategory.find(movie => movie.name === movieName)) {
+            category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
+            movies.update(updateData[0])
+              .then(returnedUser => {
+                setUserMovieDetails({
+                  like: returnedUser.like,
+                  dislike: returnedUser.dislike,
+                  unwatched: returnedUser.unwatched
+                })
+              })
+          } 
+        }
+      })
+  }
   
   return (
     <div className="App">
@@ -63,7 +106,7 @@ export default function App() {
             </Nav>
             <Routes>
               <Route exact path='/home' element={< Home />}></Route>
-              <Route exact path='/rating' element={< Rating userDetails={userDetails} />}></Route>
+              <Route exact path='/rating' element={< Rating userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  
