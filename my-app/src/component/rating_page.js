@@ -5,9 +5,6 @@ import './rating_page.css'
 import thumbsUp from './thumbs-up.png';
 import thumbsDown from './thumbs-down.png';
 import Image from 'react-bootstrap/Image'
-import {click_like} from './Like_button.js'
-import {click_dislike} from './Dislike_button.js'
-import {click_neverseen} from './Neverseen_button.js'
 
  function Rating({userDetails, updateMovieRating}){
     return (
