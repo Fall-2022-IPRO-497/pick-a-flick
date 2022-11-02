@@ -10,6 +10,7 @@ import {click_dislike} from './Dislike_button.js'
 import {click_neverseen} from './Neverseen_button.js'
 
  function Rating({userDetails}){
+    console.log("in rating->", userDetails)
     return (
     <div>
         <MovieCard></MovieCard>
