@@ -11,7 +11,6 @@ import jwt_decode from 'jwt-decode'
 
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
-  const [userMovieDetails, setUserMovieDetails] = useState(null)
     
   useEffect(() => {
     const userDetailsObject = window.localStorage.getItem('userDetailsKey')
@@ -34,11 +33,15 @@ export default function App() {
 
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
+    movies.getAll()
     setUserDetails({
       name: user.name,
-      email: user.email
+      email: user.email,
+      like: [],
+      dislike: [],
+      unwatched: []
     })
-    window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email}));
+    window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email, like: [], dislike: [], unwatched: []}));
   }
 
   function logOut() {
@@ -64,7 +67,10 @@ export default function App() {
           }
           movies.create(newUser)
             .then(returnedUser => {
-              setUserMovieDetails({
+              window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
+              setUserDetails({
+                name: userDetails.name,
+                email: userDetails.email,
                 like: returnedUser.like,
                 dislike: returnedUser.dislike,
                 unwatched: returnedUser.unwatched
@@ -77,7 +83,10 @@ export default function App() {
             category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
             movies.update(updateData[0])
               .then(returnedUser => {
-                setUserMovieDetails({
+                window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
+                setUserDetails({
+                  name: returnedUser.userName,
+                  email: returnedUser.userEmail,
                   like: returnedUser.like,
                   dislike: returnedUser.dislike,
                   unwatched: returnedUser.unwatched
