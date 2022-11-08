@@ -8,6 +8,8 @@ import './App.css';
 import Nav from 'react-bootstrap/Nav'
 import movies from './modules/movies.js'
 import jwt_decode from 'jwt-decode'
+import Image from 'react-bootstrap/Image'
+import logo from './logo.PNG'
 
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
@@ -80,10 +82,11 @@ export default function App() {
   
   return (
     <div className="App">
+      <Image src = {logo}></Image>
       {userDetails ? <button onClick={logOut}>Log Out</button> : <div id="signInDiv"></div>}
       <Router>
         <div>
-          <Nav className="justify-content-center" activeKey="/home">
+          <Nav varient = "tab" className="justify-content-center" defaultActiveKey="/home">
             <Nav.Item>
               <Nav.Link href="/home">Home</Nav.Link>
             </Nav.Item>
@@ -96,7 +99,7 @@ export default function App() {
             </Nav>
             <Routes>
               <Route exact path='/home' element={< Home />}></Route>
-              <Route exact path='/rating' element={< Rating userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
+              <Route exact path='/rating' element={< Rating userDetails={userDetails} />}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  
