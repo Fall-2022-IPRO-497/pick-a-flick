@@ -33,15 +33,23 @@ export default function App() {
 
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
+    let userData = []
+    
     movies.getAll()
-    setUserDetails({
-      name: user.name,
-      email: user.email,
-      like: [],
-      dislike: [],
-      unwatched: []
-    })
-    window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email, like: [], dislike: [], unwatched: []}));
+      .then(dataEntries => {
+        userData = dataEntries.filter(userDataEntry => user.name === userDataEntry.userName)
+        if (userData.length === 0) {
+          movies.create({userName: user.name, userEmail: user.email, like: [], dislike: [], unwatched: []})
+            .then(returnedUser => {
+              console.log(returnedUser)
+              window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
+              setUserDetails(returnedUser)
+          })
+        } else {
+          window.localStorage.setItem('userDetailsKey', JSON.stringify(userData[0]))
+          setUserDetails(userData[0])
+        }
+      })
   }
 
   function logOut() {
@@ -56,44 +64,17 @@ export default function App() {
 
     movies.getAll()
       .then(dataEntries => {
-        updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.email)
-        if (updateData.length === 0) {
-          let newUser = {
-            userName: userDetails.name,
-            userEmail: userDetails.email,
-            like: category === "like" ? [{name: movieName}] : [],
-            dislike: category === "dislike" ? [{name: movieName}] : [],
-            unwatched: category === "unwatched" ? [{name: movieName}] : [],
-          }
-          movies.create(newUser)
-            .then(returnedUser => {
-              window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
-              setUserDetails({
-                name: userDetails.name,
-                email: userDetails.email,
-                like: returnedUser.like,
-                dislike: returnedUser.dislike,
-                unwatched: returnedUser.unwatched
-              })
-            })
-        } else {
-          
+        updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.userEmail)
+          console.log(updateData)
           let oldCategory = category === "like" ? updateData[0].like : (category === "dislike" ? updateData[0].dislike : updateData[0].unwatched)
           if (!oldCategory.find(movie => movie.name === movieName)) {
             category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
             movies.update(updateData[0])
               .then(returnedUser => {
                 window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
-                setUserDetails({
-                  name: returnedUser.userName,
-                  email: returnedUser.userEmail,
-                  like: returnedUser.like,
-                  dislike: returnedUser.dislike,
-                  unwatched: returnedUser.unwatched
-                })
+                setUserDetails(returnedUser)
               })
           } 
-        }
       })
   }
   
