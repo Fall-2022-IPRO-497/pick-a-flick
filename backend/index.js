@@ -10,7 +10,6 @@ require('dotenv').config()
 const Movie = require('./models/movies')
 
 app.get('/api/movies', (req, res) => {
-    
     Movie.find({})
       .then(movies => {
         res.json(movies)

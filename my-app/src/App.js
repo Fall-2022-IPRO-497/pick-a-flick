@@ -35,16 +35,49 @@ export default function App() {
 
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
-    setUserDetails({
-      name: user.name,
-      email: user.email
-    })
-    window.localStorage.setItem('userDetailsKey', JSON.stringify({name: user.name, email: user.email}));
+    let userData = []
+    
+    movies.getAll()
+      .then(dataEntries => {
+        userData = dataEntries.filter(userDataEntry => user.name === userDataEntry.userName)
+        if (userData.length === 0) {
+          movies.create({userName: user.name, userEmail: user.email, like: [], dislike: [], unwatched: []})
+            .then(returnedUser => {
+              console.log(returnedUser)
+              window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
+              setUserDetails(returnedUser)
+          })
+        } else {
+          window.localStorage.setItem('userDetailsKey', JSON.stringify(userData[0]))
+          setUserDetails(userData[0])
+        }
+      })
   }
 
   function logOut() {
     window.localStorage.removeItem('userDetailsKey')
     setUserDetails(null)
+  }
+
+  function updateMovieRating(event, userDetails, category) {
+    event.preventDefault()
+    let movieName = "dummyMovieName"
+    var updateData = []
+
+    movies.getAll()
+      .then(dataEntries => {
+        updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.userEmail)
+          console.log(updateData)
+          let oldCategory = category === "like" ? updateData[0].like : (category === "dislike" ? updateData[0].dislike : updateData[0].unwatched)
+          if (!oldCategory.find(movie => movie.name === movieName)) {
+            category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
+            movies.update(updateData[0])
+              .then(returnedUser => {
+                window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
+                setUserDetails(returnedUser)
+              })
+          } 
+      })
   }
   
   return (
@@ -65,8 +98,8 @@ export default function App() {
               </Nav.Item>
             </Nav>
             <Routes>
-              <Route exact path='/home' element={< Home userDetails={userDetails}/>}></Route>
-              <Route exact path='/rating' element={< Rating userDetails={userDetails}/>}></Route>
+              <Route exact path='/home' element={< Home />}></Route>
+              <Route exact path='/rating' element={< Rating userDetails={userDetails} />}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  
