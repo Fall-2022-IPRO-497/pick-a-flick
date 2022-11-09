@@ -1,5 +1,5 @@
-UserName: Yongkang Hu
-UserEmail: hu.yongkangsg114@gmail.com
-Dislike: [dummyMovieName ]
-Like: [dummyMovieName ]
-Unwatched: [dummyMovieName ]
+UserName: Haoran Zhang
+UserEmail: hzhang133@hawk.iit.edu
+Dislike: []
+Like: []
+Unwatched: []
