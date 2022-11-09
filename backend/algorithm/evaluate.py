@@ -1,54 +1,72 @@
 import json
-import random
 import sys
+from sklearn.linear_model import LogisticRegression
+import numpy as np
+import pandas as pd
+from collections import defaultdict
+
 
 def parse(file_name):
     # read in data
-    data = json.load(file_name)
+    f = open(file_name)
+    data = json.load(f)
 
-    # create the dataset
+    # create the input/output vectors
     x, y = [], []
 
     # parse the data
     for d in data.keys():
         # filter likes
         if d=="Like":
-            lst = data[d]
-            for item in lst:
-                x.append(item)
+            movie_list = data[d]
+            for movie in movie_list:
+                x.append(movie.values())
                 y.append(1)
         # filter dislikes
         elif d=="Dislike":
-            lst = data[d]
-            for item in lst:
-                x.append(item)
+            movie_list = data[d]
+            for movie in movie_list:
+                x.append(movie.values())
                 y.append(0)
 
     # return the built dataset
-    return x, y
+    df = pd.DataFrame(x, columns=data["Like"][0])
+    df = df.drop("title", axis=1)
+    return df, y
 
-def train(x, y):
-    pass
 
+def map_column(df, file_name, field_name):
+    # create empty dictionary
+    dct = defaultdict(lambda :0)
+
+    # map data from file
+    with open(file_name) as file:
+        for i, item in enumerate(file):
+            dct[item.lower().strip()] = i+1 # zero is reserved
+
+    # encode the category in dataframe
+    df[field_name] = df[field_name].map(lambda x: dct[x.lower()])
+
+
+def train_model(df, results):
+    model = LogisticRegression().fit(df.iloc[:,1:], results)
+    return model
 
 
 # USAGE: python3 evaluate.py <data_file_name>
 if __name__=="__main__":
     # load args
-    args = sys.argv[1:]
-    data_file_name = args[0]
+    path = sys.argv[0].partition("evaluate.py")[0]
+    info_path = path+"info/"
+    data_file_name = path+sys.argv[1]
 
     # create raw dataset
-    x_data, y_data = parse(data_file_name)
-    assert len(x_data) == len(y_data)
+    data_x, data_y = parse(data_file_name)
 
-    # split into training and testing (80-20)
-    random_indices = random.shuffle(range(len(x_data)))
-    threshold_idx = int(0.8 * len(x_data))
-    train_x = [x_data[x] for x in random_indices[:threshold_idx]]
-    train_y = [y_data[y] for y in random_indices[:threshold_idx]]
-    test_x = [x_data[x] for x in random_indices[threshold_idx:]]
-    test_y = [y_data[y] for y in random_indices[threshold_idx:]]
+    # assign categorical data to numerical
+    map_column(data_x, info_path+"genres.txt", "genre")
+    map_column(data_x, info_path+"leads.txt", "lead")
+    print(data_x)
 
     # train model
-    model = train(train_x, train_y)
+    movie_model = train_model(data_x, data_y)
