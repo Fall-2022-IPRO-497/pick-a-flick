@@ -9,10 +9,13 @@ import Nav from 'react-bootstrap/Nav'
 import movies from './modules/movies.js'
 import jwt_decode from 'jwt-decode'
 import Image from 'react-bootstrap/Image'
-import logo from './logo.PNG'
+import logo from './cropped_logo.png'
 
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
+  const [movieId, setMovieId] = useState(354912)
+  var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605]
+
     
   useEffect(() => {
     const userDetailsObject = window.localStorage.getItem('userDetailsKey')
@@ -33,6 +36,10 @@ export default function App() {
   }, [userDetails])
 
 
+  function getNewMovieId() {
+    setMovieId(test[Math.floor(Math.random() * test.length)])
+  }
+
   function handleCallbackResponse(response) {
     const user = jwt_decode(response.credential)
     let userData = []
@@ -52,6 +59,7 @@ export default function App() {
           setUserDetails(userData[0])
         }
       })
+      getNewMovieId()
   }
 
   function logOut() {
@@ -78,6 +86,7 @@ export default function App() {
               })
           } 
       })
+    getNewMovieId()
   }
   
   return (
@@ -98,10 +107,8 @@ export default function App() {
               </Nav.Item>
             </Nav>
             <Routes>
-
-              <Route exact path='/home' element={< Home userDetails={userDetails} />}></Route>
-
-              <Route exact path='/rating' element={< Rating userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
+              <Route exact path='/home' element={< Home />}></Route>
+              <Route exact path='/rating' element={< Rating movie_id={movieId} userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  

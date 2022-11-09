@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import MovieDetails from '../get_movie_details';
 
 
-function MovieCard() {
-
-    var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605]
+function MovieCard(props) {
 
     if (1 == 0){
         return (
@@ -25,7 +23,7 @@ function MovieCard() {
     else {
         return (
             <div>
-                <MovieDetails id = {test[0]}/>
+                <MovieDetails id = {props.id}/>
             </div>
         );
     }
