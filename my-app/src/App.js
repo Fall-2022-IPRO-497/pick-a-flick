@@ -14,6 +14,7 @@ import logo from './cropped_logo.png'
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
   const [movieId, setMovieId] = useState(354912)
+  const [movieInformation, setMovieInformation] = useState(null)
   var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605]
 
     
@@ -68,16 +69,22 @@ export default function App() {
 
   function updateMovieRating(event, userDetails, category) {
     event.preventDefault()
-    let movieName = "dummyMovieName"
+    let movieObject = {
+      name: movieInformation.details.title,
+      voteAverage: movieInformation.voteAverage,
+      popularity: movieInformation.popularity,
+      year: movieInformation.year,
+      genres: movieInformation.genres
+    }
+    console.log(movieObject)
     var updateData = []
 
     movies.getAll()
       .then(dataEntries => {
         updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.userEmail)
-          console.log(updateData)
           let oldCategory = category === "like" ? updateData[0].like : (category === "dislike" ? updateData[0].dislike : updateData[0].unwatched)
-          if (!oldCategory.find(movie => movie.name === movieName)) {
-            category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
+          if (!oldCategory.find(movie => movie.name === movieObject.name)) {
+            category === "like" ? updateData[0].like.push(movieObject) : (category === "dislike" ? updateData[0].dislike.push(movieObject) : updateData[0].unwatched.push(movieObject))
             movies.update(updateData[0])
               .then(returnedUser => {
                 window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
@@ -107,7 +114,11 @@ export default function App() {
             </Nav>
             <Routes>
               <Route exact path='/home' element={< Home />}></Route>
-              <Route exact path='/rating' element={< Rating movie_id={movieId} userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
+              <Route exact path='/rating' element={< Rating 
+                movie_id={movieId} userDetails={userDetails} 
+                updateMovieRating={updateMovieRating} 
+                movieInformation={movieInformation} 
+                setMovieInformation={setMovieInformation}/>}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  

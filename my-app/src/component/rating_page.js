@@ -6,11 +6,14 @@ import thumbsUp from './thumbs-up.png';
 import thumbsDown from './thumbs-down.png';
 import Image from 'react-bootstrap/Image'
 
- function Rating({movie_id, userDetails, updateMovieRating}){
+ function Rating({movie_id, userDetails, updateMovieRating, movieInformation, setMovieInformation}){
 
     return (
     <div>
-        <MovieCard id = {movie_id}/>
+        <MovieCard 
+          id={movie_id} 
+          movieInformation={movieInformation} 
+          setMovieInformation={setMovieInformation}/>
         <div>
           <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {event => updateMovieRating(event, userDetails, "like")} fluid={true}></Image></Button>{' '}
           <Button variant="secondary" onClick = {event => updateMovieRating(event, userDetails, "unwatched")}>Havent Seen It</Button>{' '}

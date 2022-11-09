@@ -11,7 +11,11 @@ mongoose.connect(url)
   })
 
   const movieDetails = new mongoose.Schema({
-    name: String
+    name: String,
+    voteAverage: Number,
+    popularity: Number,
+    year: Number,
+    genres: String
   })
 
   const movieSchema = new mongoose.Schema({
