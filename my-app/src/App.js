@@ -59,7 +59,6 @@ export default function App() {
           setUserDetails(userData[0])
         }
       })
-      getNewMovieId()
   }
 
   function logOut() {
