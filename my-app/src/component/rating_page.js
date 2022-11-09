@@ -11,7 +11,7 @@ import Image from 'react-bootstrap/Image'
     return (
     <div>
         <MovieCard id = {movie_id}/>
-        <div classname = 'button-container'>
+        <div>
           <Button variant="success" ><Image className='thumb-button' src = {thumbsUp} onClick = {event => updateMovieRating(event, userDetails, "like")} fluid={true}></Image></Button>{' '}
           <Button variant="secondary" onClick = {event => updateMovieRating(event, userDetails, "unwatched")}>Havent Seen It</Button>{' '}
           <Button variant="danger" ><Image  className='thumb-button' src = {thumbsDown} onClick = {event => updateMovieRating(event, userDetails, "dislike")}fluid={true}></Image></Button>{' '}
