@@ -1,5 +1,5 @@
 UserName: Yongkang Hu
 UserEmail: hu.yongkangsg114@gmail.com
-Dislike: []
-Like: []
-Unwatched: [dummyMovie4 ]
+Dislike: [dummyMovieName ]
+Like: [dummyMovieName ]
+Unwatched: [dummyMovieName ]

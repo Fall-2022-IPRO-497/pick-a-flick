@@ -4,11 +4,11 @@ import logo from './logo.PNG'
 
 
 
- function Home(){
+ function Home({userDetails}){
+    console.log("userDetails ->", userDetails)
     return (
         <div>
-            <h1>Welcome to the Home page!</h1>
-            <Image src = {logo}></Image>
+            <h1>{userDetails ? "Welcome Back! " + userDetails.name : "Welcome!\n Please sign in for customized experience!"}</h1>
         </div>
     
     );
