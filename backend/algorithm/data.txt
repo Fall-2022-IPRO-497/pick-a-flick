@@ -1,5 +1,5 @@
 UserName: Haoran Zhang
 UserEmail: hzhang133@hawk.iit.edu
-Dislike: []
-Like: []
+Dislike: [dummyMovieName ]
+Like: [dummyMovieName ]
 Unwatched: []
