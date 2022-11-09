@@ -69,16 +69,22 @@ export default function App() {
 
   function updateMovieRating(event, userDetails, category) {
     event.preventDefault()
-    let movieName = "dummyMovieName"
+    let movieObject = {
+      name: movieInformation.details.title,
+      voteAverage: movieInformation.voteAverage,
+      popularity: movieInformation.popularity,
+      year: movieInformation.year,
+      genres: movieInformation.genres
+    }
+    console.log(movieObject)
     var updateData = []
 
     movies.getAll()
       .then(dataEntries => {
         updateData = dataEntries.filter(userDataEntry => userDataEntry.userEmail === userDetails.userEmail)
-          console.log(updateData)
           let oldCategory = category === "like" ? updateData[0].like : (category === "dislike" ? updateData[0].dislike : updateData[0].unwatched)
-          if (!oldCategory.find(movie => movie.name === movieName)) {
-            category === "like" ? updateData[0].like.push({name: movieName}) : (category === "dislike" ? updateData[0].dislike.push({name: movieName}) : updateData[0].unwatched.push({name: movieName}))
+          if (!oldCategory.find(movie => movie.name === movieObject.name)) {
+            category === "like" ? updateData[0].like.push(movieObject) : (category === "dislike" ? updateData[0].dislike.push(movieObject) : updateData[0].unwatched.push(movieObject))
             movies.update(updateData[0])
               .then(returnedUser => {
                 window.localStorage.setItem('userDetailsKey', JSON.stringify(returnedUser))
