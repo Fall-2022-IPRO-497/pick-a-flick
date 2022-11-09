@@ -16,33 +16,78 @@ app.get('/api/movies', (req, res) => {
       })
       .catch(error => console.log(error))
 })
+
+function create_json_obj(data, movies) {
+    for (var i=0; i<movies.length; i++) {
+        var movie = movies[i]
+        var padding = '  '
+        var two_padding = padding + padding
+        var three_padding = two_padding + padding
+        data += '\n'
+        data += two_padding
+        data += '{\n'
+        data += three_padding
+        data += '"name": '
+        data += `"${movie.name}",`
+        data += '\n'
+        data += three_padding
+        data += '"voteAverage": '
+        data += `"${movie.voteAverage}",`
+        data += '\n'
+        data += three_padding
+        data += '"popularity": '
+        data += `"${movie.popularity}",`
+        data += '\n'
+        data += three_padding
+        data += '"year": '
+        data += `"${movie.year}",`
+        data += '\n'
+        data += three_padding
+        data += '"genres": '
+        data += `"${movie.genres}"`
+        data += '\n'
+        data += two_padding
+        data += '}'
+        if (i != movies.length-1) {
+            data += ','
+        }
+    }
+    return data
+}
+
 function output_data(body) {
     console.log("Outputing data to a text file")
     const fs = require('fs')
-    var data = 'UserName: '
-    data += body.userName
+    var padding = '  '
+    var data = '{\n'
+    data += padding
+    data += '"UserName": '
+    data += `"${body.userName}",`
     data += '\n'
-    data += 'UserEmail: '
-    data += body.userEmail
+    data += padding
+    data += '"UserEmail": '
+    data += `"${body.userEmail}",`
     data += '\n'
-    data += 'Dislike: ['
-    for (var movie of body.dislike) {
-        data += movie.name
-        data += ' '
-    }
-    data += ']\n'
-    data += 'Like: ['
-    for (var movie of body.like) {
-        data += movie.name
-        data += ' '
-    }
-    data += ']\n'
-    data += 'Unwatched: ['
-    for (var movie of body.unwatched) {
-        data += movie.name
-        data += ' '
-    }
+    data += padding
+    data += '"Dislike": ['
+    data = create_json_obj(data, body.dislike)
+    data += '\n'
+    data += padding
+    data += '],\n'
+    data += padding
+    data += '"Like": ['
+    data = create_json_obj(data, body.like)
+    data += '\n'
+    data += padding
+    data += '],\n'
+    data += padding
+    data += '"Unwatched": ['
+    data = create_json_obj(data, body.unwatched)
+    data += '\n'
+    data += padding
     data += ']'
+    data += '\n'
+    data += '}'
 
     fs.writeFile('./algorithm/data.txt', data, (err) =>  {
         if (err) throw err;
