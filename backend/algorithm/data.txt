@@ -1,5 +1,122 @@
-UserName: Haoran Zhang
-UserEmail: hzhang133@hawk.iit.edu
-Dislike: [dummyMovieName ]
-Like: [dummyMovieName ]
-Unwatched: []
+{
+  "UserName": "Haoran Zhang",
+  "UserEmail": "hzhang133@hawk.iit.edu",
+  "Dislike": [
+    {
+      "name": "dummyMovieName",
+      "voteAverage": "undefined",
+      "popularity": "undefined",
+      "year": "undefined",
+      "genres": "undefined"
+    },
+    {
+      "name": "Halloween Ends",
+      "voteAverage": "6.559",
+      "popularity": "1109.2",
+      "year": "2022",
+      "genres": "Horror/Thriller"
+    },
+    {
+      "name": "The Infernal Machine",
+      "voteAverage": "6.86",
+      "popularity": "1020.642",
+      "year": "2022",
+      "genres": "Thriller/Mystery"
+    },
+    {
+      "name": "Orphan: First Kill",
+      "voteAverage": "6.816",
+      "popularity": "1200.379",
+      "year": "2022",
+      "genres": "Horror/Thriller"
+    }
+  ],
+  "Like": [
+    {
+      "name": "dummyMovieName",
+      "voteAverage": "undefined",
+      "popularity": "undefined",
+      "year": "undefined",
+      "genres": "undefined"
+    },
+    {
+      "name": "dummyMovieName1",
+      "voteAverage": "undefined",
+      "popularity": "undefined",
+      "year": "undefined",
+      "genres": "undefined"
+    },
+    {
+      "name": "Coco",
+      "voteAverage": "8.226",
+      "popularity": "883.967",
+      "year": "2017",
+      "genres": "Family/Animation"
+    },
+    {
+      "name": "Black Adam",
+      "voteAverage": "6.844",
+      "popularity": "3772.253",
+      "year": "2022",
+      "genres": "Action/Fantasy"
+    },
+    {
+      "name": "Orphan: First Kill",
+      "voteAverage": "6.816",
+      "popularity": "1200.379",
+      "year": "2022",
+      "genres": "Horror/Thriller"
+    },
+    {
+      "name": "The Infernal Machine",
+      "voteAverage": "6.86",
+      "popularity": "1020.642",
+      "year": "2022",
+      "genres": "Thriller/Mystery"
+    },
+    {
+      "name": "Halloween Ends",
+      "voteAverage": "6.559",
+      "popularity": "1109.2",
+      "year": "2022",
+      "genres": "Horror/Thriller"
+    },
+    {
+      "name": "Hocus Pocus 2",
+      "voteAverage": "7.59",
+      "popularity": "1549.993",
+      "year": "2022",
+      "genres": "Fantasy/Comedy"
+    }
+  ],
+  "Unwatched": [
+    {
+      "name": "dummyMovieName",
+      "voteAverage": "undefined",
+      "popularity": "undefined",
+      "year": "undefined",
+      "genres": "undefined"
+    },
+    {
+      "name": "Bullet Train",
+      "voteAverage": "7.513",
+      "popularity": "1344.331",
+      "year": "2022",
+      "genres": "Action/Comedy"
+    },
+    {
+      "name": "Orphan: First Kill",
+      "voteAverage": "6.816",
+      "popularity": "1600.98",
+      "year": "2022",
+      "genres": "Horror/Thriller"
+    },
+    {
+      "name": "Coco",
+      "voteAverage": "8.226",
+      "popularity": "883.967",
+      "year": "2017",
+      "genres": "Family/Animation"
+    }
+  ]
+}
