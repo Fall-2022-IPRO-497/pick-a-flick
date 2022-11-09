@@ -14,6 +14,7 @@ import logo from './cropped_logo.png'
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
   const [movieId, setMovieId] = useState(354912)
+  const [movieInformation, setMovieInformation] = useState(null)
   var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605]
 
     
@@ -107,7 +108,11 @@ export default function App() {
             </Nav>
             <Routes>
               <Route exact path='/home' element={< Home />}></Route>
-              <Route exact path='/rating' element={< Rating movie_id={movieId} userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
+              <Route exact path='/rating' element={< Rating 
+                movie_id={movieId} userDetails={userDetails} 
+                updateMovieRating={updateMovieRating} 
+                movieInformation={movieInformation} 
+                setMovieInformation={setMovieInformation}/>}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
         </div>  
