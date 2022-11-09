@@ -98,7 +98,9 @@ export default function App() {
               </Nav.Item>
             </Nav>
             <Routes>
+
               <Route exact path='/home' element={< Home userDetails={userDetails} />}></Route>
+
               <Route exact path='/rating' element={< Rating userDetails={userDetails} updateMovieRating={updateMovieRating}/>}></Route>
               <Route exact path='/recommendation' element={< Recommendations />}></Route>
             </Routes>
