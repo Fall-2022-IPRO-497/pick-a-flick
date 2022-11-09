@@ -10,6 +10,8 @@ export default function MovieDetails(props){
     var [year, setYear] = useState();
     var [genres, setGenres] = useState();
     var [overview, setOverview] = useState();
+    var [voteAverage, setVoteAverage] = useState();
+    var [popularity, setPopularity] = useState()
     useEffect(() => GetMovieDetails(props.id), [props.id]);
 
     function GetMovieDetails(id) {
@@ -25,6 +27,8 @@ export default function MovieDetails(props){
             setGenres(data.genres[0].name + "/" + data.genres[1].name)
             setOverview(data.overview)
             setYear((data.release_date).substring(0,4))
+            setPopularity(data.popularity)
+            setVoteAverage(data.vote_average)
         }, function( err ) {
             console.error(err)
         });
