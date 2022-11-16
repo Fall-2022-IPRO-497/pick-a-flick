@@ -113,7 +113,7 @@ export default function App() {
               </Nav.Item>
             </Nav>
             <Routes>
-              <Route exact path='/home' element={< Home />}></Route>
+              <Route exact path='/home' element={< Home userDetails={userDetails}/>}></Route>
               <Route exact path='/rating' element={< Rating 
                 movie_id={movieId} userDetails={userDetails} 
                 updateMovieRating={updateMovieRating} 
