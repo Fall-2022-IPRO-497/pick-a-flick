@@ -13,9 +13,11 @@ import logo from './cropped_logo.png'
 
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
-  const [movieId, setMovieId] = useState(354912)
+  const [movieId, setMovieId] = useState(597)
   const [movieInformation, setMovieInformation] = useState(null)
-  var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605]
+  var test = [354912, 760161, 436270, 642885, 616820, 718930, 916605, 505642, 829280, 616037, 774825, 673, 508943, 597, 12444, 675, 157336, 299534,
+    482373, 550988, 24021, 696806, 451048, 952374, 360920, 425, 198663, 804413, 379686, 4247, 527774, 975714, 1865, 38757, 11932, 122917, 163, 417644,
+    955, 10897]
 
     
   useEffect(() => {
