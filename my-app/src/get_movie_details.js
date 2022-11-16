@@ -1,6 +1,6 @@
 import React from "react"
 import theMovieDb from  './moviedb.js'
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import './get_movie_details.css';
 
 export default function MovieDetails(props){

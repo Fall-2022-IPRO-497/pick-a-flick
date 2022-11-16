@@ -1,7 +1,6 @@
 import moviePosterEx from './RevengeOfTheSith.jpg';
 import './movie_card.css';
 import Image from 'react-bootstrap/Image'
-import PropTypes from 'prop-types';
 import MovieDetails from '../get_movie_details';
 
 
