@@ -10,7 +10,45 @@ import movies from './modules/movies.js'
 import jwt_decode from 'jwt-decode'
 import Image from 'react-bootstrap/Image'
 import logo from './cropped_logo.png'
+import styled from "styled-components";
 
+
+const Button = styled.button`
+  background-color: red;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: 0;
+  text-transform: uppercase;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+`;
+const Button1 = styled.button`
+  background-color: black;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: 0;
+  text-transform: uppercase;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+`;
+const Button2 = styled.button`
+  background-color: slategrey;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 5px;
+  outline: 0;
+  text-transform: uppercase;
+  margin: 10px 0px;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px lightgray;
+  transition: ease background-color 250ms;
+`;
 export default function App() {
   const [userDetails, setUserDetails] = useState(null)
   const [movieId, setMovieId] = useState(597)
@@ -100,18 +138,18 @@ export default function App() {
   return (
     <div className="App">
       <Image src = {logo}></Image>
-      {userDetails ? <button onClick={logOut}>Log Out</button> : <div id="signInDiv"></div>}
+      {userDetails ? <Button1 onClick={logOut}>Log Out</Button1> : <div id="signInDiv"></div>}
       <Router>
         <div>
           <Nav varient = "tab" className="justify-content-center" defaultActiveKey="/home">
             <Nav.Item>
-              <Nav.Link href="/home">Home</Nav.Link>
+              <Nav.Link href="/home"><Button2>Home</Button2></Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/rating">Rating</Nav.Link>
+              <Nav.Link href="/rating"><Button2>Rating</Button2></Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/recommendation">Recommendations</Nav.Link>
+              <Nav.Link href="/recommendation"><Button2>Recommendations</Button2></Nav.Link>
               </Nav.Item>
             </Nav>
             <Routes>

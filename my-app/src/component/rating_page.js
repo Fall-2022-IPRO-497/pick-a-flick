@@ -9,7 +9,12 @@ import Image from 'react-bootstrap/Image'
  function Rating({movie_id, userDetails, updateMovieRating, movieInformation, setMovieInformation}){
 
     return (
-    <div>
+    <div style={{
+        backgroundColor: 'firebrick',
+        width: '1900px',
+        height: '865px',
+        textAlign:"inherit"
+      }}>
         <MovieCard 
           id={movie_id} 
           movieInformation={movieInformation} 
