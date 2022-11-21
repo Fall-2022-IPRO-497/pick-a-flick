@@ -23,7 +23,6 @@ const Button = styled.button`
         height: '865px',
         textAlign:"inherit"
       }}>
-                
             <h1> <Button>{userDetails ? "Welcome Back! " + userDetails.userName : "Welcome!\n Please sign in for customized experience!"}</Button></h1>
         </div>
     
