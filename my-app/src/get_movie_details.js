@@ -32,7 +32,7 @@ export default function MovieDetails(props){
           {props.movieInformation && 
             <div >
               <img className = 'movie-poster' src = {props.movieInformation.url} alt={"new"}/>
-              <h1>{props.movieInformation.details?.title}</h1>
+              <h1>{props.movieInformation.details.title}</h1>
               <h2>{props.movieInformation.year}  {props.movieInformation.genres}</h2>
               <h4 className = 'overview'>{props.movieInformation.overview}</h4>
             </div>}

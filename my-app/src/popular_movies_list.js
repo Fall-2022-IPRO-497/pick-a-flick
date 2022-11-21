@@ -75,7 +75,12 @@ export default class PopularMoviesList extends Component {
 
 
 			return (
-					<div className="PopularMovies">
+					<div style={{
+						backgroundColor: 'firebrick',
+						width: '1900px',
+						height: '865px',
+						textAlign:"inherit"
+					  }} className="PopularMovies">
 						<ListGroup>
 							{movies}
 						</ListGroup>
