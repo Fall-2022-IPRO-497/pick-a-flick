@@ -123,5 +123,6 @@ if __name__=="__main__":
         rankings[i][1] = prob[1]
 
     # show results
-    print(rankings)
+    for movie, prob in sorted(rankings):
+        print(movie)
     
