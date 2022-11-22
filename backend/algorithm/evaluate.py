@@ -1,8 +1,8 @@
 import json
 import sys
-from sklearn.neural_network import MLPClassifier
-import numpy as np
-import pandas as pd
+from sklearn.neural_network import MLPClassifier # scikit-learn
+import numpy as np # numpy
+import pandas as pd # pandas
 from collections import defaultdict
 
 
