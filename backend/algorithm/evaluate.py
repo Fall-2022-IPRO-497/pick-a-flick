@@ -5,6 +5,7 @@ import numpy as np # numpy
 import pandas as pd # pandas
 from collections import defaultdict
 
+GENRE_LABELS = [28, 12, 16, 35, 80, 99, 18, 10571, 14, 36, 27, 10402, 9648, 10749, 878, 10770]
 
 def parse_rated_movies(file_name):
     # read in data
@@ -38,27 +39,15 @@ def parse_test_movies(file_name):
     # read in data
     with open(file_name) as f:
         data = json.load(f)
-
-    # create the input vector
-    x = []
-    
-    # parse the data
-    for movie in data:
-        x.append(movie.values())
     
     # return the built dataset
-    df = pd.DataFrame(x, columns=data[0].keys())
+    df = pd.DataFrame([movie.values() for movie in data], columns=data[0].keys())
     return df
 
 def encode_genre(df):
-    # load all genre id labels (from tmdb)
-    labels = [28, 12, 16, 35, 80, 99, 18, 10571, 14, 36, 27, 10402, 9648, 10749, 878, 10770]
-    
     # encode the category in dataframe
-    for label in labels:
+    for label in GENRE_LABELS:
         df.insert(0, f"genre_{label}", [1 if label in x else 0 for x in df["genre_ids"]], True)
-    # drop the original column
-    df = df.drop(columns="genre_ids")
 
     # export final updated dataframe
     return df
@@ -71,6 +60,7 @@ def convert_release_date_to_year(df):
     return df
 
 def train_model(df, results):
+    # create multi-layer perceptron classifier
     model = MLPClassifier(hidden_layer_sizes=(len(df),),
                           alpha=0.01,
                           solver="lbfgs",
@@ -87,40 +77,33 @@ def train_model(df, results):
 if __name__=="__main__":
     # load args
     path = sys.argv[0].partition("evaluate.py")[0]
-    info_path = path+"info/"
     data_file_name = path+sys.argv[1]
     test_file_name = path+sys.argv[2] # contains the movies to rank
 
     # create raw training dataset
     data_x, data_y = parse_rated_movies(data_file_name)
-    data_x = data_x.drop("title", axis=1)
 
     # prepare training set
     data_x = encode_genre(data_x)
     data_x = convert_release_date_to_year(data_x)
 
     # train model
-    movie_model = train_model(data_x, data_y)
+    movie_model = train_model(data_x.drop(columns=["title", "genre_ids"]), data_y)
 
     # create testing dataset
     test_x = parse_test_movies(test_file_name)
 
-    # encode testing set
+    # prepare testing set
     test_x = encode_genre(test_x)
-    test_x = convert_release_date_to_year(test_x)
-
-    # store list of titles and their scores
-    rankings = []
-    for title in test_x["title"]:
-        rankings.append([title, -1]) # initialize score to -1
-    test_x = test_x.drop("title", axis=1)    
+    test_x = convert_release_date_to_year(test_x)  
 
     # rank movies
-    probs = movie_model.predict_proba(test_x.iloc[:,1:])
-    for i, prob in enumerate(probs):
-        rankings[i][1] = prob[1]
+    probs = movie_model.predict_proba(test_x.drop(columns=["title", "genre_ids"]).iloc[:,1:])
+    test_x.insert(0, "probability", [prob[1] for prob in probs])
 
-    # show results
-    for movie, prob in sorted(rankings, key=lambda x : -x[1]):
-        print(movie, prob)
+    # export results to results.json
+    with open(path+"results.json", "w") as writer:
+        final_df = test_x.sort_values(by="probability", axis=0, ascending=False)
+        final_df = final_df.drop(columns=["probability"]+[f"genre_{l}" for l in GENRE_LABELS])
+        writer.write(final_df.to_json(orient="records"))
     
