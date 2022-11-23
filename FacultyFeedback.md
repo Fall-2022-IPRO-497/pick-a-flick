@@ -67,5 +67,9 @@
 - Demo should be from end user perspective
 
 ## Week 14 ##
+- Good name and nice logo
+- Like the age range, but tech savvy people can enjoy as well
+- Scenario #1 lots of text - cut down to a few bullets
+- Perhaps your scenario should be Yongkang since that is the logged in user
 
 ## Week 15 ##
