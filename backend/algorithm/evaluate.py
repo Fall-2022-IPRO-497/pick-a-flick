@@ -43,41 +43,39 @@ def parse_test_movies(file_name):
     x = []
     
     # parse the data
-    for d in data.keys():
-        movie_list = data[d]
-        for movie in movie_list:
-            x.append(movie.values())
+    for movie in data:
+        x.append(movie.values())
     
     # return the built dataset
-    df = pd.DataFrame(x, columns=movie_list[0].keys())
+    df = pd.DataFrame(x, columns=data[0].keys())
     return df
 
-
-def one_hot_encode(df, file_name, field_name):
-    # load all labels
-    labels = []
-    with open(file_name) as file:
-        for item in file:
-            labels.append(item.strip().lower()) # zero is reserved
-
+def encode_genre(df):
+    # load all genre id labels (from tmdb)
+    labels = [28, 12, 16, 35, 80, 99, 18, 10571, 14, 36, 27, 10402, 9648, 10749, 878, 10770]
+    
     # encode the category in dataframe
-    new_cols = []
     for label in labels:
-        new_cols.append(np.where(df[field_name]==label, 1, 0))
-    new_df = pd.DataFrame(np.asarray(new_cols).reshape(-1, len(labels)), columns=[f"{field_name}_{l}" for l in labels])
-    df = pd.concat([df, new_df], axis=1)
-
+        df.insert(0, f"genre_{label}", [1 if label in x else 0 for x in df["genre_ids"]], True)
     # drop the original column
-    df = df.drop(columns=field_name)
+    df = df.drop(columns="genre_ids")
 
     # export final updated dataframe
     return df
 
+def convert_release_date_to_year(df):
+    # extract year from release date
+    df["release_date"] = df.apply(lambda row : int(row["release_date"].partition("-")[0]), axis=1)
+
+    # export final updated dataframe
+    return df
 
 def train_model(df, results):
-    model = MLPClassifier(hidden_layer_sizes=(5*len(df),),
+    model = MLPClassifier(hidden_layer_sizes=(len(df),),
+                          alpha=0.01,
+                          solver="lbfgs",
                           activation="logistic",
-                          learning_rate="adaptive",
+                          learning_rate="constant",
                           learning_rate_init=.001,
                           max_iter=2000,
                           random_state=0)
@@ -97,9 +95,9 @@ if __name__=="__main__":
     data_x, data_y = parse_rated_movies(data_file_name)
     data_x = data_x.drop("title", axis=1)
 
-    # encode training set
-    data_x = one_hot_encode(data_x, info_path+"genres.txt", "genre")
-    data_x = one_hot_encode(data_x, info_path+"leads.txt", "lead")
+    # prepare training set
+    data_x = encode_genre(data_x)
+    data_x = convert_release_date_to_year(data_x)
 
     # train model
     movie_model = train_model(data_x, data_y)
@@ -108,8 +106,8 @@ if __name__=="__main__":
     test_x = parse_test_movies(test_file_name)
 
     # encode testing set
-    test_x = one_hot_encode(test_x, info_path+"genres.txt", "genre")
-    test_x = one_hot_encode(test_x, info_path+"leads.txt", "lead")
+    test_x = encode_genre(test_x)
+    test_x = convert_release_date_to_year(test_x)
 
     # store list of titles and their scores
     rankings = []
@@ -123,6 +121,6 @@ if __name__=="__main__":
         rankings[i][1] = prob[1]
 
     # show results
-    for movie, prob in sorted(rankings):
-        print(movie)
+    for movie, prob in sorted(rankings, key=lambda x : -x[1]):
+        print(movie, prob)
     
